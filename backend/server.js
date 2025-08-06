@@ -13,8 +13,7 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({
-  origin: ['https://cv-lelo.netlify.app'], // add both frontend URLs (local + deployed)
+app.use(cors({ // add both frontend URLs (local + deployed)
   credentials: true,
 }))
 
