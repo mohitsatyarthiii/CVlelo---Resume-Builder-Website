@@ -13,23 +13,10 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://cv-lelo.netlify.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (e.g. mobile apps, curl, postman)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // optional: if you use cookies / auth headers
-}));
+  origin: ['https://cv-lelo.netlify.app'], // add both frontend URLs (local + deployed)
+  credentials: true,
+}))
 
 // Connect DB
 connectDB();
@@ -44,13 +31,10 @@ app.use('/api/resume', resumeRoutes)
 app.use('/uploads',
     express.static(path.join(__dirname, 'uploads'), {
         setHeaders: (res, _path) => {
-            res.setHeader('Access-Control-Allow-Origin', 'https://cv-lelo.netlify.app');
-            res.setHeader('Access-Control-Allow-Methods', 'GET');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            res.set('Access-Control-Allow-Origin', 'https://cv-lelo.netlify.app')
         }
     })
-);
-
+)
 
 //Routes
 
