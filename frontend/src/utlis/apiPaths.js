@@ -1,4 +1,4 @@
-export const  BASE_URL = 'https://cvlelo.onrender.com'
+export const  BASE_URL = 'https://cvlelo.onrender.com';
 
 //Routes used for frontend
 export const API_PATHS = {

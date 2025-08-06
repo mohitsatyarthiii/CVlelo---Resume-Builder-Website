@@ -13,7 +13,10 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors())
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://cvlelo.onrender.com'], // add both frontend URLs (local + deployed)
+  credentials: true,
+}))
 
 // Connect DB
 connectDB();
