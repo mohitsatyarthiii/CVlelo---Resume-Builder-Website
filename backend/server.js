@@ -13,12 +13,26 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Update CORS configuration to accept multiple origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://cvlelo.netlify.app',
+  'https://incomparable-praline-4597b3.netlify.app'
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL 
-    : 'http://localhost:5173',
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   credentials: true
-}))
+}));
 
 // Connect DB
 connectDB();
@@ -31,15 +45,16 @@ app.use('/api/auth', userRoutes)
 app.use('/api/resume', resumeRoutes)
 
 app.use('/uploads',
-    express.static(path.join(__dirname, 'uploads'), {
-        setHeaders: (res, _path) => {
-            res.set('Access-Control-Allow-Origin', 
-              process.env.NODE_ENV === 'production'
-                ? process.env.FRONTEND_URL
-                : 'http://localhost:5173')
-        }
-    })
-)
+  express.static(path.join(__dirname, 'uploads'), {
+    setHeaders: (res, _path) => {
+      const origin = res.req.headers.origin;
+      if (allowedOrigins.includes(origin)) {
+        res.set('Access-Control-Allow-Origin', origin);
+      }
+    }
+  })
+);
+
 
 //Routes
 
