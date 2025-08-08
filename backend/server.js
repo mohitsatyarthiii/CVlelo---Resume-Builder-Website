@@ -13,8 +13,11 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors({ // add both frontend URLs (local + deployed)
-  credentials: true,
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? process.env.FRONTEND_URL 
+    : 'http://localhost:5173',
+  credentials: true
 }))
 
 // Connect DB
@@ -30,7 +33,10 @@ app.use('/api/resume', resumeRoutes)
 app.use('/uploads',
     express.static(path.join(__dirname, 'uploads'), {
         setHeaders: (res, _path) => {
-            res.set('Access-Control-Allow-Origin', 'https://cv-lelo.netlify.app')
+            res.set('Access-Control-Allow-Origin', 
+              process.env.NODE_ENV === 'production'
+                ? process.env.FRONTEND_URL
+                : 'http://localhost:5173')
         }
     })
 )
