@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../context/UserContext";
 import { cardStyles } from "../assets/dummystyle";
-import { Award, Check, Clock, Edit, Trash2, TrendingUp, Zap } from "lucide-react";
+import { Award, Check, Clock, Edit, LogOut, Trash2, TrendingUp, Zap } from "lucide-react";
 
 // ResumeSummaryCard Component
 export const ResumeSummaryCard = ({
@@ -170,32 +170,41 @@ export const ResumeSummaryCard = ({
 };
 
 // Profile info cards
-export const ProfileInfoCard = ( ) => {
-  const navigate = useNavigate()
-  const {user, clearUser} = useContext(userContext)
+export const ProfileInfoCard = () => {
+  const navigate = useNavigate();
+  const { user, clearUser } = useContext(userContext);
 
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
-    navigate('/')
-  }
+    navigate("/");
+  };
+
   return (
     user && (
-      <div className={cardStyles.profileCard}>
-        <div className={cardStyles.profileInitialsContainer}>
-          <span className={cardStyles.profileInitialsText}>
-            {user.name ? user.name.charAt(0).toUpperCase() : ""}
-          </span>
+      <div className="flex items-center gap-3 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-lg border border-white/20 shadow-sm hover:shadow-md transition-all">
+        {/* Avatar */}
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold">
+          {user.name ? user.name.charAt(0).toUpperCase() : ""}
         </div>
-        <div className={cardStyles.profileName}>
+
+        {/* Name */}
+        <span className="text-sm font-medium text-gray-800 whitespace-nowrap max-w-[120px] truncate">
           {user.name || ""}
-        </div>
-        <button className={cardStyles.logoutButton}
-        onClick={handleLogout}>Logout</button>
+        </span>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="p-1 rounded-full bg-white/30 hover:bg-white/40 text-gray-700 hover:text-red-500 transition-all"
+          title="Logout"
+        >
+          <LogOut size={16} />
+        </button>
       </div>
     )
-  )
-}
+  );
+};
 
 //Template cards
 export const TemplateCard = ({thumbnailImg, isSelected, onSelect}) => {

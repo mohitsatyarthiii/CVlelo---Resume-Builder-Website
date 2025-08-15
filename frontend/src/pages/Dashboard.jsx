@@ -148,7 +148,7 @@ const Dashboard = () => {
               <div>
                 <h1 className={styles.headerTitle}>My Resumes</h1>
                 <p className={styles.headerSubtitle}>
-                  {allResumes.length > 0 ? `You have ${allResumes.length} resumes${allResumes.length !== 1 ? 's' : ''}`:
+                  {allResumes.length > 0 ? `You have ${allResumes.length} resume${allResumes.length !== 1 ? 's' : ''}`:
                   'Start building your resume'}
                 </p>
               </div>
