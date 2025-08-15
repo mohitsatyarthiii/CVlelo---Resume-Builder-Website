@@ -18,16 +18,9 @@ CVlelo is the modern resume builder that helps you craft job-winning resumes in 
 
 <img width="1920" height="915" alt="dashboard" src="https://github.com/user-attachments/assets/3807c57a-12e9-4823-9a7f-8331824ff5e7" />
 
-
-## 🏆 Featured Templates
-
-| Professional | Creative | Executive | Minimalist |
-|--------------|----------|-----------|------------|
-| ![Professional Template](https://example.com/professional.jpg) | ![Creative Template](https://example.com/creative.jpg) | ![Executive Template](https://example.com/executive.jpg) | ![Minimalist Template](https://example.com/minimalist.jpg) |
-
 ## 🚀 Getting Started
 
-1. Visit [cvlelo.com](https://cvlelo.com)
+1. Visit [cvlelo.com]((https://cvlelo.netlify.app/))
 2. Select your favorite template
 3. Fill in your details with our easy editor
 4. Download your polished resume
