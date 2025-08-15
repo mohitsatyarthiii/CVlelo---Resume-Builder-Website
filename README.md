@@ -20,7 +20,7 @@ CVlelo is the modern resume builder that helps you craft job-winning resumes in 
 
 ## 🚀 Getting Started
 
-1. Visit [cvlelo.com]([https://cvlelo.netlify.app/])
+1. Visit [cvlelo.com](https://cvlelo.netlify.app)
 2. Select your favorite template
 3. Fill in your details with our easy editor
 4. Download your polished resume
